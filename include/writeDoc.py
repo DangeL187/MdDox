@@ -25,7 +25,7 @@ def getBriefFunRef(ref, class_name, file_name=None):
         else:
             ref_type = ''
             ref_name = '[' + ref_name_list[0] + '](./' + 'Class_' + class_name.split()[0].replace('::', '_') + '.md#' + ref.name.replace(' ', '_') + ') (' + new_ref[-1]
-        output = '| ' + ref_type + ' | <p> ' + ref_name + ' </p> <p> ' + ref.brief + ' </p> <img width=1920/> |\n'
+        output = '| ' + ref_type.replace('<', '\<') + ' | <p> ' + ref_name + ' </p> <p> ' + ref.brief + ' </p> <img width=1920/> |\n'
         return output
     else:
         return ''
@@ -37,14 +37,14 @@ def getBriefRef(ref, class_name):
     if len(ref_name_list) > 1:
         ref_type = ' '.join(ref_name_list[:-1])
         ref_name = '[' + ref_name_list[-1] + '](./' + 'Class_' + class_name.split()[0].replace('::', '_') + '.md#' + ref.name.replace(' ', '_') + ')'
-        output = '| ' + ref_type + ' | <p> ' + ref_name + ' </p> <p> ' + ref.brief + ' </p> <img width=1920/> |\n'
+        output = '| ' + ref_type.replace('<', '\<') + ' | <p> ' + ref_name + ' </p> <p> ' + ref.brief + ' </p> <img width=1920/> |\n'
         return output
     else:
         return ''
 
 
 def getRef(ref):
-    output = '| <p id="' + ref.name.replace(' ', '_') + '"><p align="left"> `' + ref.name + '` |\n|-|\n'
+    output = '| <p id="' + ref.name.replace(' ', '_') + '"><p align="left"> `' + ref.name.replace('<', '\<') + '` |\n|-|\n'
     output += '| <p> '
     if ref.brief:
         output += '<p> ' + ref.brief + ' </p>'
@@ -55,7 +55,7 @@ def getRef(ref):
 
 
 def getFunRef(fun_ref):
-    output = '| <p id="' + fun_ref.name.replace(' ', '_') + '"><p align="left"> `' + fun_ref.name + '` |\n|-|\n'
+    output = '| <p id="' + fun_ref.name.replace(' ', '_') + '"><p align="left"> `' + fun_ref.name.replace('<', '\<') + '` |\n|-|\n'
     output += '| <p> '
     if fun_ref.brief:
         output += '<p> ' + fun_ref.brief + ' </p>'
@@ -190,10 +190,10 @@ def writeDocumentation(file_path, documentation, output_file_path):
                 0] + '](./' + new_file_path + ')\n'  # add class to the documentation
             Path(full_menu_file_path).mkdir(parents=True, exist_ok=True)  # create new folder
             with open(full_menu_file_path + '/' + new_file_path, 'w') as f:  # create new .md file for class
-                f.write(getClassRef(i, file_path).replace('<', '\<'))
+                f.write(getClassRef(i, file_path))
         else:
             menu_output += getClassRef(i, file_path)
     Path(full_menu_file_path).mkdir(parents=True, exist_ok=True)  # create new folder
     with open(full_menu_file_path + '/' + menu_file_path.split('/')[-1] + '.md', 'w') as f:  # create new .md file for file
-        f.write(menu_output.replace('<', '\<'))
+        f.write(menu_output)
     return unique_menu_path + '/' + menu_file_path.split('/')[-1]
