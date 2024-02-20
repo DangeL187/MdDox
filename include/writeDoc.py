@@ -44,7 +44,7 @@ def getBriefRef(ref, class_name):
 
 
 def getRef(ref):
-    output = '| <p id="' + ref.name.replace(' ', '_') + '"><p align="left"> `' + ref.name.replace('<', '\<') + '` |\n|-|\n'
+    output = '| <p id="' + ref.name.replace(' ', '_') + '"><p align="left"> `' + ref.name + '` |\n|-|\n'
     output += '| <p> '
     if ref.brief:
         output += '<p> ' + ref.brief + ' </p>'
@@ -55,7 +55,7 @@ def getRef(ref):
 
 
 def getFunRef(fun_ref):
-    output = '| <p id="' + fun_ref.name.replace(' ', '_') + '"><p align="left"> `' + fun_ref.name.replace('<', '\<') + '` |\n|-|\n'
+    output = '| <p id="' + fun_ref.name.replace(' ', '_') + '"><p align="left"> `' + fun_ref.name + '` |\n|-|\n'
     output += '| <p> '
     if fun_ref.brief:
         output += '<p> ' + fun_ref.brief + ' </p>'
@@ -64,7 +64,7 @@ def getFunRef(fun_ref):
     if len(fun_ref.params) > 0:
         output += '<p> <b> Parameters: </b> </p> <ul> <li> ' + ' </li> <li> '.join(fun_ref.params) + ' </li> </ul>'
     if fun_ref.returns != '':
-        output += '<p> <b> Returns: </b> </p> <ul> <li> ' + fun_ref.returns + ' </li> </ul>'
+        output += '<p> <b> Returns: </b> </p> <ul> <li> ' + fun_ref.returns.replace('<', '\<') + ' </li> </ul>'
     output += ' </p> <img width=1920/> | \n\n'
     return output
 
