@@ -77,6 +77,8 @@ def generateReferences(file_path, parsed_file, parsed_comments):
                 class_ref.name = item[key] + ' Class Reference'
                 if '@brief' in item:
                     class_ref.brief = item['@brief']
+                if '@det' in item:
+                    class_ref.detailed = item['@det'].split('\n')
             elif key == '@fn':
                 full_fun_name = item[key].split('(')[0].split()[-1]
                 access_spec = getAccessSpecifiers(file_path, parsed_file, ['method', 'constructor', 'destructor'], full_fun_name)

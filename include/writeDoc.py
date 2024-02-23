@@ -79,7 +79,8 @@ def getClassRef(class_ref, file_path):
     if class_ref.brief:
         output += '### ' + class_ref.brief + '\n'
     if class_ref.detailed:
-        output += class_ref.detailed + '\n'
+        output += ('<p> <b> Detailed description: </b> </p> <ul> <li> ' + ' </li> <li> '.join(
+            class_ref.detailed) + ' </li> </ul> \n').replace('@line', '\n').replace('@tab', '\t').replace('<code>', '\n\n```c++\n').replace('</code>', '\n```\n\n')
 
     funcs = [['## Global Function Documentation', class_ref.global_functions]]
 

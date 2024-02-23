@@ -3,7 +3,7 @@ from clang.cindex import CursorKind
 
 clang.cindex.Config.set_library_file('D:\\LLVM\\bin\\libclang.dll')
 
-decl_types = {CursorKind.STRUCT_DECL: 'structure', CursorKind.TYPEDEF_DECL: 'typedef', CursorKind.CLASS_DECL: 'class',
+decl_types = {CursorKind.STRUCT_DECL: 'structure', CursorKind.CLASS_DECL: 'class', CursorKind.CLASS_TEMPLATE: 'class', CursorKind.TYPEDEF_DECL: 'typedef',
               CursorKind.FUNCTION_DECL: 'function', CursorKind.VAR_DECL: 'variable',
               CursorKind.CONSTRUCTOR: 'constructor', CursorKind.DESTRUCTOR: 'destructor'}
 
